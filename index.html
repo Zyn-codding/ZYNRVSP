@@ -139,6 +139,174 @@
   <!-- Musik otomatis -->
   <audio autoplay loop>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Browser kamu gak support audio.
+  </audio>
+
+  <script>
+    const phoneInput = document.getElementById("phone");
+    const notif = document.getElementById("notif");
+
+    const rules = {
+      "62": { min: 12, max: 15 }, // Indonesia
+      "60": { min: 10, max: 13 }, // Malaysia
+      "1":  { min: 11, max: 12 }, // USA/Canada
+      "91": { min: 12, max: 13 }, // India
+    };
+
+    function showNotif(message, type = "success") {
+      notif.textContent = message;
+      notif.className = "notif show " + type;
+      setTimeout(() => {
+        notif.className = "notif";
+      }, 2500);
+    }
+
+    document.getElementById("sendBug").addEventListener("click", () => {
+      const phone = phoneInput.value.trim();
+
+      if (!phone) {
+        showNotif("ISI DULU KOCAK", "error");
+      } else if (/\D/.test(phone)) {
+        showNotif("GABISA huruf KOCAK", "error");
+      } else {
+        let found = false;
+        for (let code in rules) {
+          if (phone.startsWith(code)) {
+            found = true;
+            const { min, max } = rules[code];
+            if (phone.length < min) {
+              showNotif("Nomor terlalu pendek ❌", "error");
+            } else if (phone.length > max) {
+              showNotif("yah kocak kebanyakan woi 🤣", "error");
+            } else {
+              showNotif("Nomor +" + phone + " berhasil dikirim ✅", "success");
+            }
+          }
+        }
+        if (!found) {
+          showNotif("Kode negara tidak dikenal 🌍", "error");
+        }
+      }
+    });
+
+    document.getElementById("btnAndroid").addEventListener("click", () => {
+      showNotif("Berhasil memindahkan ke Android", "success");
+    });
+
+    document.getElementById("btnIphone").addEventListener("click", () => {
+      showNotif("Berhasil memindahkan ke IPHONE", "success");
+    });
+
+    document.getElementById("btnIos").addEventListener("click", () => {
+      showNotif("Berhasil memindahkan ke IOS", "success");
+    });
+  </script>
+</body>
+</html>      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .btn {
+      display: inline-block;
+      margin: 8px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-main {
+      background: teal;
+      color: white;
+      width: 90%;
+    }
+    .btn-platform {
+      background: #111;
+      color: white;
+      min-width: 120px;
+    }
+    blockquote {
+      font-style: italic;
+      margin: 20px 0;
+      font-size: 15px;
+      color: #ddd;
+    }
+    .works {
+      margin: 10px 0;
+      color: #bbb;
+    }
+    .devs {
+      font-weight: bold;
+      font-size: 18px;
+      background: linear-gradient(90deg, #2b86c5, #06d6a0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+    .notif {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+    }
+    .notif.show {
+      display: block;
+    }
+    .notif.success {
+      background: #064e3b;
+      color: #a7f3d0;
+    }
+    .notif.error {
+      background: #7f1d1d;
+      color: #fecaca;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- Judul merah -->
+    <h1 style="color: red; margin-bottom: 10px;">ZYNRVSP</h1>
+
+    <!-- Foto di bawah judul -->
+    <img src="https://photos.app.goo.gl/x9CebkyXPnCetWzA9" alt="Foto ZYNRVSP" style="max-width: 120px; margin-bottom: 15px; border-radius: 50%;">
+
+    <!-- Logo di atas input -->
+    <img src="https://photos.app.goo.gl/Sc5ZASG3e623cQqd8" alt="Logo">
+
+    <!-- Input nomor -->
+    <input id="phone" type="text" placeholder="+62812xxxx" />
+
+    <!-- Tombol utama -->
+    <button class="btn btn-main" id="sendBug">SEND BUG</button>
+
+    <!-- Quote -->
+    <blockquote>"jangan ngebug orang yang tidak pernah salah dengan mu, jika tidak kau adalah pengecut."</blockquote>
+
+    <!-- Works in WhatsApp -->
+    <div class="works">WORKS IN WHATSAPP</div>
+
+    <!-- Developers -->
+    <div class="devs">Developers Zyn Hubs</div>
+
+    <!-- Tombol platform -->
+    <div>
+      <h3>SENDIRI BUG</h3>
+      <button class="btn btn-platform" id="btnAndroid">ANDROID</button>
+      <button class="btn btn-platform" id="btnIphone">IPHONE</button>
+      <button class="btn btn-platform" id="btnIos">IOS</button>
+    </div>
+
+    <!-- Notifikasi -->
+    <div id="notif" class="notif"></div>
+  </div>
+
+  <!-- Musik otomatis -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
